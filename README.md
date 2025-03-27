@@ -234,3 +234,226 @@ function updateInfo(className) {
 // Initialer Plan laden (z.B. für 5A)
 updatePlan("5a");
 updateInfo("5a");
+// Plan für jede Klasse (von 5A bis 10E)
+const plans = {
+    "5a": [
+        ["Mathe", "Englisch", "Biologie", "WP1: Informatik", "Deutsch"],
+        ["Englisch", "Mathe", "Biologie", "WP2: Kunst", "Französisch"],
+        ["Mathe", "Deutsch", "WP1: Spanisch", "Sport", "Geografie"],
+        ["Englisch", "Mathe", "WP1: Geschichte", "Französisch", "WP2: Theater"],
+        ["Deutsch", "Sport", "WP1: Türkisch", "WP1: Arbeit und Beruf", "Französisch"]
+    ],
+    "5b": [
+        ["Mathe", "Englisch", "WP1: Informatik", "Chemie", "Deutsch"],
+        ["Englisch", "Mathe", "Biologie", "WP2: Musik", "Französisch"],
+        ["Mathe", "Deutsch", "WP1: Spanisch", "Sport", "Geografie"],
+        ["Englisch", "Mathe", "WP1: Geschichte", "Französisch", "WP2: Kunst"],
+        ["Deutsch", "Sport", "WP1: Türkisch", "WP1: Arbeit und Beruf", "Französisch"]
+    ],
+    "10a": [
+        ["Mathe", "Deutsch", "WP1: Informatik", "Chemie", "Sport"],
+        ["Mathe", "Französisch", "WP1: Spanisch", "Englisch", "Geografie"],
+        ["Deutsch", "Englisch", "WP1: Geschichte", "Sport", "Mathe"],
+        ["Chemie", "Biologie", "WP1: Türkisch", "Mathe", "Deutsch"],
+        ["Französisch", "Sport", "WP2: Kunst", "Englisch", "Deutsch"]
+    ],
+    // Weitere Klassen können hier ebenfalls ergänzt werden.
+};
+
+// Wichtige Informationen pro Klasse und Gruppe
+const info = {
+    "5a": "Woche der Mathe-Wiederholung. Bitte vorbereiten.",
+    "10a": "Woche der Prüfungsvorbereitung. Beachte geänderte Zeiten für Deutsch.",
+    // Weitere Infos für andere Klassen
+};
+
+// Funktion zum Wechseln der Klasse
+document.getElementById("classSelect").addEventListener("change", function() {
+    const selectedClass = this.value;
+    updatePlan(selectedClass);
+    updateInfo(selectedClass);
+});
+
+// Plan und Infos anzeigen
+function updatePlan(className) {
+    const planContent = document.getElementById("planContent");
+    planContent.innerHTML = ""; // Plan zurücksetzen
+
+    if (plans[className]) {
+        plans[className].forEach(day => {
+            const stundeRow = document.createElement("div");
+            stundeRow.classList.add("stunde");
+            day.forEach(fach => {
+                const fachDiv = document.createElement("div");
+                fachDiv.classList.add("fach");
+                fachDiv.textContent = fach;
+                stundeRow.appendChild(fachDiv);
+            });
+            planContent.appendChild(stundeRow);
+        });
+    }
+}
+
+function updateInfo(className) {
+    const infoContent = document.getElementById("infoContent");
+    infoContent.innerHTML = ""; // Infos zurücksetzen
+
+    if (info[className]) {
+        const infoParagraph = document.createElement("p");
+        infoParagraph.textContent = info[className];
+        infoContent.appendChild(infoParagraph);
+    }
+}
+
+// Initialer Plan laden (z.B. für 5A)
+updatePlan("5a");
+updateInfo("5a");
+// Plan für jede Klasse (von 5A bis 10E)
+const plans = {
+    "5a": [
+        ["Mathe", "Englisch", "Biologie", "WP1: Informatik", "Deutsch"],
+        ["Englisch", "Mathe", "Biologie", "WP2: Kunst", "Französisch"],
+        ["Mathe", "Deutsch", "WP1: Spanisch", "Sport", "Geografie"],
+        ["Englisch", "Mathe", "WP1: Geschichte", "Französisch", "WP2: Theater"],
+        ["Deutsch", "Sport", "WP1: Türkisch", "WP1: Arbeit und Beruf", "Französisch"]
+    ],
+    "5b": [
+        ["Mathe", "Englisch", "WP1: Informatik", "Chemie", "Deutsch"],
+        ["Englisch", "Mathe", "Biologie", "WP2: Musik", "Französisch"],
+        ["Mathe", "Deutsch", "WP1: Spanisch", "Sport", "Geografie"],
+        ["Englisch", "Mathe", "WP1: Geschichte", "Französisch", "WP2: Kunst"],
+        ["Deutsch", "Sport", "WP1: Türkisch", "WP1: Arbeit und Beruf", "Französisch"]
+    ],
+    "10a": [
+        ["Mathe", "Deutsch", "WP1: Informatik", "Chemie", "Sport"],
+        ["Mathe", "Französisch", "WP1: Spanisch", "Englisch", "Geografie"],
+        ["Deutsch", "Englisch", "WP1: Geschichte", "Sport", "Mathe"],
+        ["Chemie", "Biologie", "WP1: Türkisch", "Mathe", "Deutsch"],
+        ["Französisch", "Sport", "WP2: Kunst", "Englisch", "Deutsch"]
+    ],
+    // Weitere Klassen können hier ebenfalls ergänzt werden.
+};
+
+// Wichtige Informationen pro Klasse und Gruppe
+const info = {
+    "5a": "Woche der Mathe-Wiederholung. Bitte vorbereiten.",
+    "10a": "Woche der Prüfungsvorbereitung. Beachte geänderte Zeiten für Deutsch.",
+    // Weitere Infos für andere Klassen
+};
+
+// Funktion zum Wechseln der Klasse
+document.getElementById("classSelect").addEventListener("change", function() {
+    const selectedClass = this.value;
+    updatePlan(selectedClass);
+    updateInfo(selectedClass);
+});
+
+// Plan und Infos anzeigen
+function updatePlan(className) {
+    const planContent = document.getElementById("planContent");
+    planContent.innerHTML = ""; // Plan zurücksetzen
+
+    if (plans[className]) {
+        plans[className].forEach(day => {
+            const stundeRow = document.createElement("div");
+            stundeRow.classList.add("stunde");
+            day.forEach(fach => {
+                const fachDiv = document.createElement("div");
+                fachDiv.classList.add("fach");
+                fachDiv.textContent = fach;
+                stundeRow.appendChild(fachDiv);
+            });
+            planContent.appendChild(stundeRow);
+        });
+    }
+}
+
+function updateInfo(className) {
+    const infoContent = document.getElementById("infoContent");
+    infoContent.innerHTML = ""; // Infos zurücksetzen
+
+    if (info[className]) {
+        const infoParagraph = document.createElement("p");
+        infoParagraph.textContent = info[className];
+        infoContent.appendChild(infoParagraph);
+    }
+}
+
+// Initialer Plan laden (z.B. für 5A)
+updatePlan("5a");
+updateInfo("5a");
+// Plan für jede Klasse (von 5A bis 10E)
+const plans = {
+    "5a": [
+        ["Mathe", "Englisch", "Biologie", "WP1: Informatik", "Deutsch"],
+        ["Englisch", "Mathe", "Biologie", "WP2: Kunst", "Französisch"],
+        ["Mathe", "Deutsch", "WP1: Spanisch", "Sport", "Geografie"],
+        ["Englisch", "Mathe", "WP1: Geschichte", "Französisch", "WP2: Theater"],
+        ["Deutsch", "Sport", "WP1: Türkisch", "WP1: Arbeit und Beruf", "Französisch"]
+    ],
+    "5b": [
+        ["Mathe", "Englisch", "WP1: Informatik", "Chemie", "Deutsch"],
+        ["Englisch", "Mathe", "Biologie", "WP2: Musik", "Französisch"],
+        ["Mathe", "Deutsch", "WP1: Spanisch", "Sport", "Geografie"],
+        ["Englisch", "Mathe", "WP1: Geschichte", "Französisch", "WP2: Kunst"],
+        ["Deutsch", "Sport", "WP1: Türkisch", "WP1: Arbeit und Beruf", "Französisch"]
+    ],
+    "10a": [
+        ["Mathe", "Deutsch", "WP1: Informatik", "Chemie", "Sport"],
+        ["Mathe", "Französisch", "WP1: Spanisch", "Englisch", "Geografie"],
+        ["Deutsch", "Englisch", "WP1: Geschichte", "Sport", "Mathe"],
+        ["Chemie", "Biologie", "WP1: Türkisch", "Mathe", "Deutsch"],
+        ["Französisch", "Sport", "WP2: Kunst", "Englisch", "Deutsch"]
+    ],
+    // Weitere Klassen können hier ebenfalls ergänzt werden.
+};
+
+// Wichtige Informationen pro Klasse und Gruppe
+const info = {
+    "5a": "Woche der Mathe-Wiederholung. Bitte vorbereiten.",
+    "10a": "Woche der Prüfungsvorbereitung. Beachte geänderte Zeiten für Deutsch.",
+    // Weitere Infos für andere Klassen
+};
+
+// Funktion zum Wechseln der Klasse
+document.getElementById("classSelect").addEventListener("change", function() {
+    const selectedClass = this.value;
+    updatePlan(selectedClass);
+    updateInfo(selectedClass);
+});
+
+// Plan und Infos anzeigen
+function updatePlan(className) {
+    const planContent = document.getElementById("planContent");
+    planContent.innerHTML = ""; // Plan zurücksetzen
+
+    if (plans[className]) {
+        plans[className].forEach(day => {
+            const stundeRow = document.createElement("div");
+            stundeRow.classList.add("stunde");
+            day.forEach(fach => {
+                const fachDiv = document.createElement("div");
+                fachDiv.classList.add("fach");
+                fachDiv.textContent = fach;
+                stundeRow.appendChild(fachDiv);
+            });
+            planContent.appendChild(stundeRow);
+        });
+    }
+}
+
+function updateInfo(className) {
+    const infoContent = document.getElementById("infoContent");
+    infoContent.innerHTML = ""; // Infos zurücksetzen
+
+    if (info[className]) {
+        const infoParagraph = document.createElement("p");
+        infoParagraph.textContent = info[className];
+        infoContent.appendChild(infoParagraph);
+    }
+}
+
+// Initialer Plan laden (z.B. für 5A)
+updatePlan("5a");
+updateInfo("5a");
+
