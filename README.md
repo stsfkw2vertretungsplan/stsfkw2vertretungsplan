@@ -9,8 +9,33 @@
 <body>
 
     <header>
-        <h1>Vertretungsplan der 10. Klasse</h1>
-        <button class="admin-btn">Admin Login</button>
+        <h1>Vertretungsplan</h1>
+        <select id="classSelect">
+            <option value="5a">5A</option>
+            <option value="5b">5B</option>
+            <option value="5c">5C</option>
+            <option value="5e">5E</option>
+            <option value="6a">6A</option>
+            <option value="6b">6B</option>
+            <option value="6c">6C</option>
+            <option value="6e">6E</option>
+            <option value="7a">7A</option>
+            <option value="7b">7B</option>
+            <option value="7c">7C</option>
+            <option value="7e">7E</option>
+            <option value="8a">8A</option>
+            <option value="8b">8B</option>
+            <option value="8c">8C</option>
+            <option value="8e">8E</option>
+            <option value="9a">9A</option>
+            <option value="9b">9B</option>
+            <option value="9c">9C</option>
+            <option value="9e">9E</option>
+            <option value="10a">10A</option>
+            <option value="10b">10B</option>
+            <option value="10c">10C</option>
+            <option value="10e">10E</option>
+        </select>
     </header>
 
     <div class="container">
@@ -22,24 +47,15 @@
                 <span>Donnerstag</span>
                 <span>Freitag</span>
             </div>
-            <div class="plan">
-                <!-- Die Zeilen für die Stunden -->
-                <div class="stunde">
-                    <div class="fach">Mathematik</div>
-                    <div class="fach">Englisch</div>
-                    <div class="fach">Biologie</div>
-                    <div class="fach">Chemie</div>
-                    <div class="fach">Deutsch</div>
-                </div>
-                <!-- Weitere Stunden folgen hier -->
+            <div class="plan" id="planContent">
+                <!-- Die Zeilen für die Stunden kommen hier dynamisch -->
             </div>
         </div>
 
         <div class="info-panel">
             <h2>Wichtige Informationen</h2>
-            <div class="info">
-                <p>Es gibt eine Versammlung für alle Schüler der 10. Klasse um 14:00 Uhr am Mittwoch.</p>
-                <p>Bitte beachten Sie den geänderten Stundenplan für den Donnerstag wegen einer Lehrerversammlung.</p>
+            <div class="info" id="infoContent">
+                <!-- Dynamische Informationen für die Klasse und Gruppe -->
             </div>
         </div>
     </div>
@@ -63,6 +79,12 @@ header {
     color: white;
     text-align: center;
     padding: 20px;
+}
+
+select {
+    font-size: 16px;
+    padding: 10px;
+    margin-top: 10px;
 }
 
 .container {
@@ -123,6 +145,11 @@ footer {
     color: white;
 }
 
+#planContent {
+    display: flex;
+    flex-direction: column;
+}
+
 .admin-btn {
     background-color: #ff5733;
     color: white;
@@ -135,9 +162,75 @@ footer {
 .admin-btn:hover {
     background-color: #d45d1c;
 }
-// Hier könnte ein einfaches Admin-Panel für Lehrer eingebaut werden
-document.querySelector('.admin-btn').addEventListener('click', function() {
-    alert("Admin Login für Lehrer (dieser Bereich ist noch in Arbeit).");
+// Plan für jede Klasse (von 5A bis 10E)
+const plans = {
+    "5a": [
+        ["Mathe", "Englisch", "Biologie", "Chemie", "Deutsch"],
+        ["Englisch", "Mathe", "Biologie", "Sport", "Französisch"],
+        ["Mathe", "Deutsch", "Biologie", "Sport", "Geografie"],
+        ["Englisch", "Mathe", "Chemie", "Französisch", "Geschichte"],
+        ["Deutsch", "Sport", "Chemie", "Mathe", "Französisch"]
+    ],
+    "5b": [
+        // Pläne für 5B (kann nach Bedarf angepasst werden)
+    ],
+    // Weitere Klassen hier hinzufügen (6a, 6b, 7a, usw.)
+    "10a": [
+        // Beispielplan für 10A
+        ["Mathe", "Deutsch", "Englisch", "Chemie", "Sport"],
+        ["Mathe", "Französisch", "Biologie", "Englisch", "Geografie"],
+        ["Deutsch", "Englisch", "Sport", "Französisch", "Mathe"],
+        ["Chemie", "Biologie", "Englisch", "Mathe", "Deutsch"],
+        ["Französisch", "Sport", "Mathe", "Englisch", "Deutsch"]
+    ],
+    // Weiterhin für 10b, 10c, 10e etc.
+};
+
+// Wichtige Informationen pro Klasse und Gruppe
+const info = {
+    "5a": "Woche der Mathe-Wiederholung. Bitte vorbereiten.",
+    "10a": "Woche der Prüfungsvorbereitung. Beachte geänderte Zeiten für Deutsch.",
+    // Weitere Infos für andere Klassen
+};
+
+// Funktion zum Wechseln der Klasse
+document.getElementById("classSelect").addEventListener("change", function() {
+    const selectedClass = this.value;
+    updatePlan(selectedClass);
+    updateInfo(selectedClass);
 });
 
-// Fügen Sie später Interaktivität hinzu, wie das Bearbeiten von Stundenplänen, Fächern usw.
+// Plan und Infos anzeigen
+function updatePlan(className) {
+    const planContent = document.getElementById("planContent");
+    planContent.innerHTML = ""; // Plan zurücksetzen
+
+    if (plans[className]) {
+        plans[className].forEach(day => {
+            const stundeRow = document.createElement("div");
+            stundeRow.classList.add("stunde");
+            day.forEach(fach => {
+                const fachDiv = document.createElement("div");
+                fachDiv.classList.add("fach");
+                fachDiv.textContent = fach;
+                stundeRow.appendChild(fachDiv);
+            });
+            planContent.appendChild(stundeRow);
+        });
+    }
+}
+
+function updateInfo(className) {
+    const infoContent = document.getElementById("infoContent");
+    infoContent.innerHTML = ""; // Infos zurücksetzen
+
+    if (info[className]) {
+        const infoParagraph = document.createElement("p");
+        infoParagraph.textContent = info[className];
+        infoContent.appendChild(infoParagraph);
+    }
+}
+
+// Initialer Plan laden (z.B. für 5A)
+updatePlan("5a");
+updateInfo("5a");
